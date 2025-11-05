@@ -41,6 +41,11 @@ vector<string> tokenize(const string &line){
             in_dquote = !in_dquote;
             continue;
         }
+        if(arg[0] == '~' && (arg.size() == 1 || arg[1] == '/')) {
+    string home = getenv("HOME") ? getenv("HOME") : "";
+    arg = home + arg.substr(1);
+}
+
         if(!in_squote && !in_dquote && isspace((unsigned char)c)){
             if(!cur.empty()){ toks.push_back(cur); cur.clear(); }
         } else {
